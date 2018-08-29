@@ -80,7 +80,8 @@
 {
     NSString *key = [url.path lastPathComponent];
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-    if (!data) {
+    if (!data)
+    {
         if ([[key pathExtension] isEqualToString:@"txt"]) {
             LSYReadModel *model = [[LSYReadModel alloc] initWithContent:[LSYReadUtilites encodeWithURL:url]];
             model.resource = url;

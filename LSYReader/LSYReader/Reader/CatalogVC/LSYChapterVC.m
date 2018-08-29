@@ -46,10 +46,18 @@ static  NSString *chapterCell = @"chapterCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:chapterCell];
+    UILabel* textLabel = nil;
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:chapterCell];
+        textLabel = [[UILabel alloc] initWithFrame:cell.bounds];
+        textLabel.tag = 10086;
+        textLabel.font = [UIFont systemFontOfSize:11];
+        [cell addSubview:textLabel];
+    }else{
+        textLabel = [cell viewWithTag:10086];
     }
-    cell.textLabel.text = _readModel.chapters[indexPath.row].title;
+    
+    textLabel.text = _readModel.chapters[indexPath.row].title;
     if (indexPath.row == _readModel.record.chapter) {
         [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }

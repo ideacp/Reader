@@ -11,6 +11,12 @@
 #import "LSYReadPageViewController.h"
 #import "LSYReadUtilites.h"
 #import "LSYReadModel.h"
+
+static inline NSString* sandbox_document() {
+    return (NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject);
+}
+
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *begin;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
@@ -32,7 +38,10 @@
    [_begin setTitle:@"" forState:UIControlStateNormal];
     [_beginEpub setEnabled:NO];
     LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"mdjyml"withExtension:@"txt"];
+    
+    NSString *stringPath = [NSString stringWithFormat:@"%@/班车.txt",sandbox_document()];
+    NSURL *fileURL = [NSURL fileURLWithPath:stringPath];
+    //[[NSBundle mainBundle] URLForResource:@"mdjyml"withExtension:@"txt"];
     pageView.resourceURL = fileURL;    //文件位置
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
